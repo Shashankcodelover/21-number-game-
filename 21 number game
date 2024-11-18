@@ -1,0 +1,150 @@
+def nearestmulktiple(num):
+    if num >= 4:
+        near = num + (4 - (num % 4))
+    else:
+        near = 4
+    return near
+
+
+def lose():
+    print("you lose the game")
+    print("try again ")
+    exit(0)
+
+
+def check_consugative(xyz):
+    i = 1
+    while i < len(xyz):
+        if xyz[i] - xyz[i - 1] != 1:
+            return False
+        i += 1
+    return True
+
+
+def start1():
+    xyz = []
+    last = 0
+    while True:
+        print("\n enter 'F' to take the first chance..")
+        print("\n enter 'S' to take the second chance..")
+        chance = input(">> ")
+
+        if chance == 'F':
+            while True:
+                if last == 20:
+                    lose()
+                else:
+                    print("\n your turn  ")
+                    print("\n how many numbers do you wish to enter? (1-3)")
+                    len_user = int(input("\n enter>>"))
+
+                    if len_user > 0 and len_user <= 3:
+                        len_com = 4 - len_user
+                    else:
+                        print("Wrong input. You are disqualified from the game  ")
+                        lose()
+
+                    i, j = 1, 1
+
+                    print("\n now enter the values ")
+                    while i <= len_user:
+                        a = int(input('>>'))
+                        xyz.append(a)
+                        i += 1
+
+                    last = xyz[-1]
+
+                    if check_consugative(xyz) == True:
+                        if last == 21:
+                            lose()
+
+                        else:
+
+                            while j <= len_com:
+                                xyz.append(last+j)
+                                j += 1
+                            print("\n order of input sftet computer turn =")
+                            print(xyz)
+                            last = xyz[-1]
+                    else:
+                        print("\n You did not input cinjugative integers :")
+                        lose()
+
+
+        elif chance == 'S':
+
+            len_com = 1
+            last = 0
+            while last < 20:
+                j = 1
+                while j <= len_com:
+                    xyz.append(last + j)
+                    j += 1
+                print("\n order of inputs after computer turn ")
+                print(xyz)
+
+                if xyz[-1] == 20:
+                    lose()
+
+                else:
+                    print("\nyour turn ")
+                    print("\n how many numbers do you entry :(1-3) ")
+                    len_user = int(input("\n enter>> "))
+                    i = 1
+                    while i <= len_user:
+                        xyz.append(int(input('> ')))
+                        i += 1
+                    last = xyz[-1]
+
+                    if check_consugative(xyz) == True:
+                        near = nearestmulktiple(last)
+                        len_com = near - last
+
+                        if len_com == 4:
+                            len_com = 3
+                        else:
+                            len_comq = len_com
+                    else:
+                        print("\n You did not input cinjugative integers :")
+                        lose()
+                        exit(0)
+
+
+            print("\n\n congratulations !!!")
+            print("you won !")
+            exit(0)
+
+        else:
+            print("\n wrong choice")
+
+
+game = True
+while game == True:
+    print("\n player 2 is computer. ")
+    print("\nDo. you want to play the 21 number game? (Yes /No) ")
+    ans = input('>')
+
+    if ans == "Yes":
+        start1()
+
+    else:
+        print("\n Do ypou want quite tghe game?(yes/no) ")
+        ans2 = input('\n>>')
+
+        if ans2 == "yes":
+            print("\n you are quiting the game..")
+            exit(0)
+        elif ans2 == "no":
+            print("\n continueing...")
+        else:
+            print("\n wrong choice ")
+
+
+
+
+
+
+
+
+
+
